@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Bluelime Learning Solutions</h1>
+        <p class="lead text-muted">Welcome to bluelime learning. We provide 247 online learning on Udemy.</p>
+        <p>
+            <a href="{% url 'index' %}" class="btn btn-info my-2">Keyword Crawling</a>
+        </p>
+        <img src="" height=300 />
+    </div>
+</section>
+<div class="container justify-content-center">
+    <div class="row">
+        <div class="col-md-12 m-5" style="text-align: center;">
+            <h1>Today's Crypto Currency News</h1>
+        </div>
+    </div>
+    <div class="row m-5 ">
+        <div class="col-md-4">
+            <form method="GET" action="{% url 'search_result' %}">
+                {% csrf_token %}
+                <input type="search" class="form-control" name="search" placeholder="enter Search Kyewords">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-secondary" type="submit">Search</button>
+        </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table justify-content-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Created_date</th>
+                        <th scope="col">hit</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for board in boards %}
+                    <tr>
+                        <th>{{ board.id }}</th>
+                        <td><a href="{{ board.get_absolute_urls }}">{{ board.title }}</a></td>
+                        <td>{{ board.created_date }}</td>
+                        <td>{{ board.hit }}</td>
+                    </tr>
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if boards.has_previous %}
+                    <li class="page-item">
+                        <a href="?p={{ boards.previous_page_number }}" class="page-link">이전으로</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="#" class="page-link disabled">이전으로</a>
+                    </li>
+                    {% endif %}
+                    </li>
+                    <li class="page-item active">
+                        <a href="#" class="page-link">{{ boards.number }} / {{ boards.paginator.num_pages }}</a>
+                    </li>
+                    {% if boards.has_next %}
+                    <li class="page-item">
+
+                        <a href="?p={{ boards.next_page_number }}" class="page-link">다음으로</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="#" class="page-link disabled">다음으로</a>
+                    </li>
+                    {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    {% endblock %}

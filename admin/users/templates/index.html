@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 m-5">
+            <h1> 키워드 검색</h1>
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="col-md-4">
+            <form method="POST" action="{% url 'scrape' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="search" class="form-control" name="keyword" aria-label="Search" placeholder="키워드 입력">
+                    <br>
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    {% endblock %}

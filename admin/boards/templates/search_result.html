@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block contents %}
+<br>
+
+<br>
+<h3 style="text-align:center">Results</h3>
+
+<br>
+<div class="jumbotron ">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table justify-content-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Created_date</th>
+                        <th scope="col">hit</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for board in boards %}
+                    <tr>
+                        <th>{{ board.id }}</th>
+                        <td><a href="{{ board.get_absolute_urls }}">{{ board.title }}</a></td>
+                        <td>{{ board.created_date }}</td>
+                        <td>{{ board.hit }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/boards/list/'">돌아가기</button>
+    </div>
+    {% empty %}
+    <p>No results found.</p>
+
+    {% endfor %}
+
+    {% endblock %}

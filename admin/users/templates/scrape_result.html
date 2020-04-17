@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Search Results </h1>
+        <p class="lead">{{ keyword }} 의 검색 결과입니다.</p>
+    </div>
+</div>
+{% if notfound %}
+
+{{ notfound }}
+
+{% endif %}
+
+<div class="container">
+    <div class="row">
+
+        {% for x in crypto.Data %}
+        <div class="card" style="width: 18rem; margin:auto; margin-top: 30px;">
+            <img src="{{ x.imageurl }}" class="card-img-top" alt="{{ x.source }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ x.title }}</h5>
+                <p class="card-text">{{ x.body }}</p>
+                <a href="{{ x.url }}" class="btn btn-primary">FindOut More</a>
+            </div>
+        </div>
+        <br />
+        <br />
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
